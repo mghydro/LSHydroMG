@@ -24,7 +24,6 @@
 #' @export
 #' @importFrom dplyr %>% mutate group_by
 #' @importFrom lubridate year month isoweek
-#' @importFrom raster rasterFromXYZ
 #'
 #'
 
