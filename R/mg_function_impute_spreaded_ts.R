@@ -22,7 +22,7 @@
 #' @importFrom dplyr %>% mutate group_by
 #' @importFrom tidyr spread
 #' @importFrom xts xts
-#' @importFrom impueTS na_kalman ggplot_na_imputations
+#' @importFrom imputeTS na_kalman ggplot_na_imputations
 #'
 #'
 
