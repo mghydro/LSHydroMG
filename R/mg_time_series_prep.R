@@ -1,4 +1,4 @@
-#' @title mg_time_series_prep
+#' @title mg_function_time_series_preparation
 #'
 #' @description Takes hydraulic head time series datafram and calculates mean values and dates for a certain timespan.
 #'df,date_column_name,value_column_name,timespan
@@ -23,7 +23,7 @@
 #'
 #' @export
 #' @importFrom dplyr %>% mutate group_by
-#' @importFrom lubridate year month isoweek
+#' @importFrom lubridate isoear month isoweek
 #' @importFrom ISOweek ISOweek2date
 #'
 #'
@@ -35,7 +35,7 @@ mg_function_time_series_preparation <- function(df,date_column_name,value_column
 
 
 
-  xx_df$jahr <- year(xx_df$date)
+  xx_df$jahr <- isoyear(xx_df$date)
   xx_df$monat <- month(xx_df$date)
   xx_df$isoweek <- isoweek(xx_df$date)
 
