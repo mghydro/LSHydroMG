@@ -8,6 +8,7 @@ mg_function_time_series_preparation(
   df,
   date_column_name,
   value_column_name,
+  id_column_name,
   timespan_weeks
 )
 }
@@ -16,7 +17,9 @@ mg_function_time_series_preparation(
 
 \item{date_column_name}{column name of the date column (should be format date)}
 
-\item{value_column_name}{column name of the value column (numeric format)}
+\item{value_column_name}{column name1of the value column (numeric format)}
+
+\item{id_column_name}{column name of identifier column (e.g. name of Grundwasssermessstelle) (character format)}
 
 \item{timespan_weeks}{number of weeks for which mean value and mean date are calculated}
 }

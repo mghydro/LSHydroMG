@@ -23,7 +23,7 @@
 
 #'
 #' @export
-#' @importFrom dplyr %>% mutate group_by
+#' @importFrom dplyr %>% mutate group_by select starts_with
 #' @importFrom lubridate isoyear month isoweek
 #' @importFrom ISOweek ISOweek2date
 #'
