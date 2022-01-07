@@ -2,7 +2,7 @@
 % Please edit documentation in R/mg_time_series_prep.R
 \name{mg_function_time_series_preparation}
 \alias{mg_function_time_series_preparation}
-\title{mg_time_series_prep}
+\title{mg_function_time_series_preparation}
 \usage{
 mg_function_time_series_preparation(
   df,
