@@ -2,6 +2,7 @@
 
 export(mg_func_template_raster)
 export(mg_function_check_number_complete_time_series)
+export(mg_function_extract_spreaded_ts)
 export(mg_function_time_series_preparation)
 importFrom(ISOweek,ISOweek2date)
 importFrom(dplyr,"%>%")
