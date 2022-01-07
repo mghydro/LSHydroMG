@@ -31,14 +31,14 @@
 
 mg_function_time_series_preparation <- function(df,date_column_name,value_column_name,id_column_name,timespan_weeks){
   xx_df <- as.data.frame(df)
-  xx_df$date <- xx_df[,date_column_name]
-  xx_df$value <- xx_df[,value_column_name]
-  xx_df$id_column_name <- xx_df[,id_column_name]
+  xx_df$xx_date <- xx_df[,date_column_name]
+  xx_df$xx_value <- xx_df[,value_column_name]
+  xx_df$xx_id_column_name <- xx_df[,id_column_name]
 
 
-  xx_df$jahr <- isoyear(xx_df$date)
-  xx_df$monat <- month(xx_df$date)
-  xx_df$isoweek <- isoweek(xx_df$date)
+  xx_df$jahr <- isoyear(xx_df$xx_date)
+  xx_df$monat <- month(xx_df$xx_date)
+  xx_df$isoweek <- isoweek(xx_df$xx_date)
 
 
   #create breaks for timespan
@@ -51,16 +51,20 @@ mg_function_time_series_preparation <- function(df,date_column_name,value_column
   for(i in seq_along(1:length(xx_list_of_weeks))){
     xx_df$timespan_weeks[(xx_df$isoweek <= max(xx_list_of_weeks[[i]]) & xx_df$isoweek >= min(xx_list_of_weeks[[i]]))] <- floor(mean(xx_list_of_weeks[[i]]))
     xx_df$timespan_weeks_label[(xx_df$isoweek <= max(xx_list_of_weeks[[i]]) & xx_df$isoweek >= min(xx_list_of_weeks[[i]]))] <- xx_labels[[i]]
-
   }
 
 
   #mittlerer Wasserstand für 14 Tage berechnen
   xx_df <- xx_df %>%
-    group_by(jahr,timespan_weeks,id_column_name) %>%
-    mutate(mean_value = mean(value),
-           mean_date = ISOweek2date(paste0(jahr,"-W",sprintf("%02d",timespan_weeks),"-",1)))
-           #mean_date = as.Date(paste(jahr, timespan_weeks, 1, sep="-"), "%Y-%U-%u"))
+    group_by(jahr,timespan_weeks,xx_id_column_name) %>%
+    mutate(mean_value = mean(xx_value),
+           mean_date = ISOweek2date(paste0(jahr,"-W",sprintf("%02d",timespan_weeks),"-",1))) %>%
+    ungroup() %>%
+    dplyr::select(!starts_with("xx"))
+
+
+
+  #mean_date = as.Date(paste(jahr, timespan_weeks, 1, sep="-"), "%Y-%U-%u"))
   return(xx_df)
 
 }
