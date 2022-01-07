@@ -24,6 +24,7 @@
 #' @export
 #' @importFrom dplyr %>% mutate group_by
 #' @importFrom lubridate year month isoweek
+#' @importFrom ISOweek ISOweek2date
 #'
 #'
 
@@ -57,7 +58,8 @@ mg_function_time_series_preparation <- function(df,date_column_name,value_column
   xx_df <- xx_df %>%
     group_by(jahr,timespan_weeks) %>%
     mutate(mean_value = mean(value),
-           mean_date = as.Date(paste(jahr, timespan_weeks, 1, sep="-"), "%Y-%U-%u"))
+           mean_date = ISOweek2date(paste0(jahr,"-W",sprintf("%02d",timespan_weeks),"-",1)))
+           #mean_date = as.Date(paste(jahr, timespan_weeks, 1, sep="-"), "%Y-%U-%u"))
   return(xx_df)
 
 }
