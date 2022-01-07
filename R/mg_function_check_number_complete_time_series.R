@@ -10,10 +10,14 @@
 #' @param fraction_of_NAs_allowed fraction of missing values allowed to count as a complete time series
 #'
 #'
-#' @return dataframe with 3  columns,
+#' @return list with two dataframes:
+#'  df "number_of_timeseries" with 3  columns,
 #'  start_zeitpunkt: start of time span
 #'  end_zeitpunkt: end of time span
 #'  anzahl_ts: number of complete time series in this time span
+#'  df "input_settings" contains the input data. Can be used with function mg_function_extract_spreaded_ts
+#'
+#'
 #'
 #'
 #' @examples
@@ -35,6 +39,9 @@ mg_function_check_number_complete_time_series <- function(df,date_column_name,va
                                                           id_column_name,
                                                           time_span_years,moving_window_width_days,
                                                           fraction_of_NAs_allowed){
+  #create output list
+  output <- list()
+
   #unify
   xx_df <- as.data.frame(df)
   xx_df$date <- xx_df[,date_column_name]
@@ -126,7 +133,19 @@ mg_function_check_number_complete_time_series <- function(df,date_column_name,va
   }
 
   number_of_timeseries<- do.call(rbind,xx_ouput_number_ts)
-  return(number_of_timeseries)
+
+  output[["number_of_timeseries"]] <- number_of_timeseries
+
+  input_settings <- data.frame(value_column_name = value_column_name,
+                               date_column_name = date_column_name,
+                               id_column_name = id_column_name,
+                               time_span_years = time_span_years,
+                               moving_window_width_days = moving_window_width_days,
+                               fraction_of_NAs_allowed = fraction_of_NAs_allowed)
+
+  output[["input_settings"]] <- input_settings
+
+  return(output)
 }
 
 
