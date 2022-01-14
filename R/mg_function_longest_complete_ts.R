@@ -53,7 +53,7 @@ mg_function_longest_complete_ts <- function(df,date_column_name,value_column_nam
 
 
 
-  print(paste0(length(unique(xx_df_subset$datenquelle)), " datasets have less than a timespan of ",n_allowed_missing_values_days," days with missing values and are longer than ",minimum_timespan_ts_years," years"))
+  print(paste0(length(unique(xx_df_subset$xx_id_col)), " datasets have less than a timespan of ",n_allowed_missing_values_days," days with missing values and are longer than ",minimum_timespan_ts_years," years"))
 
   return(xx_df_subset)
 
