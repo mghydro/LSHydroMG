@@ -49,12 +49,11 @@ mg_function_longest_complete_ts <- function(df,date_column_name,value_column_nam
            xx_length_ts = as.numeric(difftime(max(xx_date,na.rm=T),min(xx_date,na.rm=T),tz ="",units = "days"))) %>%
     filter(xx_max_diff < n_allowed_missing_values_days) %>%
     filter(xx_length_ts > minimum_timespan_ts_years*365) %>%
-    ungroup()%>%
-    dplyr::select(!starts_with("xx"))
-
-
+    ungroup()
 
   print(paste0(length(unique(xx_df_subset$xx_id_col)), " datasets have less than a timespan of ",n_allowed_missing_values_days," days with missing values and are longer than ",minimum_timespan_ts_years," years"))
+  xx_df_subset %>%
+    dplyr::select(!starts_with("xx"))
 
   return(xx_df_subset)
 
