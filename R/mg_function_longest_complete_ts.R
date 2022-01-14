@@ -49,6 +49,7 @@ mg_function_longest_complete_ts <- function(df,date_column_name,value_column_nam
            xx_length_ts = as.numeric(difftime(max(xx_date,na.rm=T),min(xx_date,na.rm=T),tz ="",units = "days"))) %>%
     filter(xx_max_diff < n_allowed_missing_values_days) %>%
     filter(xx_length_ts > minimum_timespan_ts_years*365) %>%
+    ungroup()%>%
     dplyr::select(!starts_with("xx"))
 
 
