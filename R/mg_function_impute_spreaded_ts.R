@@ -29,6 +29,8 @@
 
 mg_function_impute_spreaded_ts <- function(spreaded_ts,plot_impute,export_path = NA,imputeTS_model = "StructTS", imputeTS_type = "trend"){
 
+
+
   #create xts time series
   xx_xts <- xts(spreaded_ts[,-1],order.by = spreaded_ts$mean_date)
 
@@ -43,21 +45,23 @@ mg_function_impute_spreaded_ts <- function(spreaded_ts,plot_impute,export_path =
     p_impute <- names(xx_xts)
     for (pp in seq_along(1:length(p_impute))){
 
+      if(sum(is.na(xx_xts[,pp])) >1){
 
-      #png(paste0(export_path,"/",p_impute[pp],".jpg"),
-      #    width = 17.6, height = 14, units = "cm", res = 150)
+        xx_plot <- ggplot_na_imputations(xx_xts[,pp],xx_xts_imputed[,pp],ylab = "GW-Stand [mNN]",x_axis_labels = index(xx_xts))+
+          labs(title = p_impute[pp])
 
-      xx_plot <- ggplot_na_imputations(xx_xts[,pp],xx_xts_imputed[,pp],ylab = "GW-Stand [mNN]",x_axis_labels = index(xx_xts))+
-        labs(title = p_impute[pp])
+        plot_height <- 14
+        plot_width <- 17.6
+        name_plot <- p_impute[pp]
+        path <-  export_path
+        scale <-  1.2
 
-      plot_height <- 14
-      plot_width <- 17.6
-      name_plot <- p_impute[pp]
-      path <-  export_path
-      scale <-  1.2
+        ggsave(filename=paste0(name_plot,".jpg"), plot=xx_plot,
+               path = path,width = plot_width, height = plot_height,units = "cm", dpi = 150, scale = scale)
 
-      ggsave(filename=paste0(name_plot,".jpg"), plot=xx_plot,
-             path = path,width = plot_width, height = plot_height,units = "cm", dpi = 150, scale = scale)
+      } else {
+       print(paste0(p_impute[pp]," has no missing values"))
+      }
 
       #dev.off()
     }
