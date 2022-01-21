@@ -63,7 +63,7 @@ mg_function_impute_spreaded_ts <- function(spreaded_ts,plot_impute,export_path =
        print(paste0(p_impute[pp]," has no missing values"))
       }
 
-      #dev.off()
+
     }
   }
 
